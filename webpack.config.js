@@ -8,7 +8,7 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 module.exports = [
   {
     entry: {
-    	"vender": ['jquery', 'vue'],
+    	"vender": ['jquery', 'vue', 'createjs-easeljs'],
     	"app": './src/assets/js/index.js',
     },
     output: {
@@ -25,6 +25,13 @@ module.exports = [
           use: {
             loader: 'babel-loader'
           }
+        },
+        {
+          test: require.resolve('createjs-easeljs'),
+          use: [
+            'imports-loader?this=>window',
+            'exports-loader?window.createjs'
+          ]
         }
     	]
     },
